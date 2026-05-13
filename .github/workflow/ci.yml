@@ -1,0 +1,25 @@
+name: CI
+  push
+jobs:
+  foundry:
+    name: Foundry fmt and build
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: Checkout repository
+          uses: actions/checkout@v5
+          with:
+            submodules: recursive
+
+        - name: Install Foundry
+          uses: foundry-rs/foundry-toolchain@v1
+          with:
+            version: stable
+
+        - name: Check formatting
+          run: forge fmt --check
+
+        - name: Build contracts
+          run: forge build
+
+
