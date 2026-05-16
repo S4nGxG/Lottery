@@ -10,12 +10,16 @@ contract LotteryTest is Test {
     uint256 public constant FEE = 1 ether;
     uint256 public constant INTERVAL = 5 minutes;
     uint256 public constant BALANCE = 10 ether;
+    address public constant VRF_COORDINATOR = address(1);
+    uint256 public constant SUBSCRIPTION_ID = 0;
+    bytes32 public constant KEY_HASH = bytes32(0);
+    uint32 public constant CALLBACK_GAS_LIMIT = 500_000;
 
     address public Player1 = makeAddr("player1");
     address public Player2 = makeAddr("player2");
 
     function setUp() external {
-        lottery = new Lottery(FEE, INTERVAL);
+        lottery = new Lottery(FEE, INTERVAL, VRF_COORDINATOR, SUBSCRIPTION_ID, KEY_HASH, CALLBACK_GAS_LIMIT);
 
         vm.deal(Player1, BALANCE);
         vm.deal(Player2, BALANCE);
